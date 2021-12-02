@@ -1,0 +1,57 @@
+trigger:
+  - master
+
+jobs:
+  - job: "build"
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+      - script: |
+          git clone https://github.com/flutter/flutter.git -b stable
+          pwd
+          echo export 
+
+        displayName: flutter install
+      
+      - script: |
+          export PATH="$PATH:/home/vsts/work/1/s/flutter/bin"  
+          source ~/.bashrc
+          flutter --version
+
+        displayName: flutter export
+
+      - script: |
+          export PATH="$PATH:/home/vsts/work/1/s/flutter/bin"
+          flutter test --coverage
+        displayName: flutter test --coverage
+      
+      - script: "curl -O https://raw.githubusercontent.com/eriwen/lcov-to-cobertura-xml/master/lcov_cobertura/lcov_cobertura.py"
+        displayName: download lcov converter
+
+      - script: "python3 lcov_cobertura.py $(System.DefaultWorkingDirectory)/coverage/lcov.info --output $(System.DefaultWorkingDirectory)/coverage/coverage.xml"
+        displayName: convert lcov infofile to xml
+
+      - task: PublishCodeCoverageResults@1
+        inputs:
+          codeCoverageTool: cobertura
+          summaryFileLocation: "$(System.DefaultWorkingDirectory)/coverage/coverage.xml"
+      
+      - script: |
+          export PATH="$PATH:/home/vsts/work/1/s/flutter/bin"
+          flutter build apk
+        displayName: flutter build apk
+      - task: AndroidSigning@3
+        displayName: 'Signing and aligning APK file(s) **/*.apk'
+        inputs:
+            apkFiles: '**/*.apk'
+            apksign: true
+            apksignerKeystoreFile: upload-keystore.jks
+            apksignerKeystorePassword: $(keypassword)
+            apksignerKeystoreAlias: $(key)
+            apksignerKeyPassword: $(keypassword)
+      
+      - task: CopyFiles@2
+        inputs:
+          contents: '**/*.apk'
+          targetFolder: '$(build.artifactStagingDirectory)'
+      - task: PublishBuildArtifacts@1
