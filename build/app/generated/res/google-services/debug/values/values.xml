@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">703415913520-ico28qga1kdm2drfa6f7ocgiuh89239i.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">703415913520</string>
+    <string name="google_api_key" translatable="false">AIzaSyBDx5-3JZYg72TlOC90tL5pHMtI28ySeec</string>
+    <string name="google_app_id" translatable="false">1:703415913520:android:2aa84bcd0ec69e2570f1f5</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBDx5-3JZYg72TlOC90tL5pHMtI28ySeec</string>
+    <string name="google_storage_bucket" translatable="false">postest-training.appspot.com</string>
+    <string name="project_id" translatable="false">postest-training</string>
+</resources>
