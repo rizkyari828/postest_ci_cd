@@ -1,0 +1,5 @@
+1.	Saat menggunakan linux, terdapat beberapa perintah yang bisa digunakan. Jelaskan dan berikan contoh beberapa perintah dasar yang sering digunakan pada linux berikut ini : 
+A. chmod command untuk menentukan hak akses file/folder
+B. mv command untuk memindahkan file
+C. rmdir command untuk menghapus folder kosong
+D. chown command untuk mengganti kepemilikan/owner dari file atau folder

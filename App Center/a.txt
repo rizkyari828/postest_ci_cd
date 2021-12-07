@@ -1,0 +1,1 @@
+AppCenter.start(application, "559fc51f-cad9-45d1-bd68-625af966c4de", Analytics::class.java, Crashes::class.java)
